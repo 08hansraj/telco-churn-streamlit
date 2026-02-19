@@ -216,5 +216,5 @@ git pull
 ---
 
 # 👨‍💻 Author
-
+Hansraj Singh
 End-to-end Machine Learning deployment project demonstrating practical model serving using cloud infrastructure and modern ML engineering workflow.
