@@ -122,18 +122,66 @@ http://PUBLIC_IP:8501
 
 ---
 
-# 🔄 Accessing After Stopping EC2
+# 🔄 Accessing the Application After Stopping EC2
 
-If the EC2 instance is stopped:
+If the EC2 instance has been stopped, follow these steps to bring the application back online:
 
-1. Start the instance from AWS Console
-2. Wait until status checks pass
-3. Copy the new Public IPv4 address (may change)
-4. SSH into server
-5. Activate virtual environment
-6. Run Streamlit again
+## Step 1 – Start the EC2 Instance
 
-Stopping the instance shuts down the app.
+1. Go to AWS Console → EC2 → Instances
+2. Select your instance
+3. Click **Instance state → Start**
+4. Wait until:
+
+   * Instance state = Running
+   * Status checks = 2/2 passed
+
+## Step 2 – Copy the New Public IP
+
+After restarting, the Public IPv4 address may change.
+
+1. Open the instance details page
+2. Copy the new **Public IPv4 address**
+
+## Step 3 – SSH into the Instance
+
+From your local machine:
+
+```
+ssh -i your-key.pem ubuntu@NEW_PUBLIC_IP
+```
+
+If prompted about authenticity, type:
+
+```
+yes
+```
+
+## Step 4 – Navigate to Project Directory
+
+```
+cd telco-churn-streamlit
+```
+
+## Step 5 – Activate Virtual Environment
+
+```
+source .venv/bin/activate
+```
+
+## Step 6 – Start Streamlit Server
+
+```
+streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+```
+
+## Step 7 – Open in Browser
+
+```
+http://NEW_PUBLIC_IP:8501
+```
+
+Stopping the EC2 instance shuts down the application. The app will not be accessible until the instance is started again.
 
 ---
 
@@ -216,5 +264,7 @@ git pull
 ---
 
 # 👨‍💻 Author
-Hansraj Singh
-End-to-end Machine Learning deployment project demonstrating practical model serving using cloud infrastructure and modern ML engineering workflow.
+
+**Hansraj Singh**
+Machine Learning Engineer | Data Scientist
+End-to-end ML deployment project demonstrating practical model serving using cloud infrastructure and modern ML engineering workflow.
